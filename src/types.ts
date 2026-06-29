@@ -1,3 +1,11 @@
+export interface Capabilities {
+  coding: number;
+  reasoning: number;
+  long_context: number;
+  multilingual: number;
+  general_knowledge: number;
+}
+
 export interface ModelData {
   name: string;
   publisher: string;
@@ -10,4 +18,5 @@ export interface ModelData {
   daily_api_calls_estimate: number;
   features: string[];
   release_date: string;
+  capabilities: Capabilities;
 }

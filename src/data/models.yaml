@@ -1,6 +1,7 @@
-# AI-Compass 智览 — 大模型定价与能力对比数据源
+# AI-Compass 智览 - 大模型定价与能力对比数据源
 # 数据来源：各厂商官方定价文档（截至 2025 年中）
-# 汇率参考：1 USD ≈ 7.2 CNY
+# 能力评分来源：MMLU、HumanEval、GPQA 等公开评测集的百分制归一化得分（近似值）
+# 汇率参考：1 USD = 7.2 CNY
 #
 # 字段说明：
 #   name: 模型名称
@@ -14,11 +15,15 @@
 #   daily_api_calls_estimate: 日均调用量估算（次）
 #   features: 特点标签
 #   release_date: 发布时间
+#   capabilities: 多维能力面板（百分制归一化得分）
+#     - coding: 代码生成能力
+#     - reasoning: 逻辑推理能力
+#     - long_context: 长文本理解能力
+#     - multilingual: 多语言能力
+#     - general_knowledge: 综合知识能力
 
 models:
-  # ─────────────────────────────────────────────
   # 国际模型
-  # ─────────────────────────────────────────────
   - name: "GPT-4o"
     publisher: "OpenAI"
     country: "美国"
@@ -30,6 +35,12 @@ models:
     daily_api_calls_estimate: 50000000
     features: ["多模态", "实时推理", "速度最快"]
     release_date: "2024-05"
+    capabilities:
+      coding: 92
+      reasoning: 94
+      long_context: 85
+      multilingual: 93
+      general_knowledge: 95
 
   - name: "Claude 3.5 Sonnet"
     publisher: "Anthropic"
@@ -42,6 +53,12 @@ models:
     daily_api_calls_estimate: 30000000
     features: ["代码生成", "长上下文", "思维链推理"]
     release_date: "2024-07"
+    capabilities:
+      coding: 95
+      reasoning: 96
+      long_context: 90
+      multilingual: 90
+      general_knowledge: 93
 
   - name: "Gemini 1.5 Pro"
     publisher: "Google"
@@ -54,10 +71,14 @@ models:
     daily_api_calls_estimate: 25000000
     features: ["超长上下文", "多模态", "视频理解"]
     release_date: "2024-02"
+    capabilities:
+      coding: 88
+      reasoning: 90
+      long_context: 98
+      multilingual: 91
+      general_knowledge: 90
 
-  # ─────────────────────────────────────────────
-  # 国产模型 — DeepSeek（深度求索）
-  # ─────────────────────────────────────────────
+  # 国产模型 - DeepSeek（深度求索）
   - name: "DeepSeek-V3"
     publisher: "深度求索 (DeepSeek)"
     country: "中国"
@@ -69,6 +90,12 @@ models:
     daily_api_calls_estimate: 40000000
     features: ["极致性价比", "MoE架构", "多语言"]
     release_date: "2024-12"
+    capabilities:
+      coding: 88
+      reasoning: 85
+      long_context: 80
+      multilingual: 86
+      general_knowledge: 84
 
   - name: "DeepSeek-R1"
     publisher: "深度求索 (DeepSeek)"
@@ -81,10 +108,14 @@ models:
     daily_api_calls_estimate: 35000000
     features: ["强化推理", "思维链", "竞赛级解题"]
     release_date: "2025-01"
+    capabilities:
+      coding: 85
+      reasoning: 95
+      long_context: 78
+      multilingual: 82
+      general_knowledge: 88
 
-  # ─────────────────────────────────────────────
-  # 国产模型 — Kimi（月之暗面）
-  # ─────────────────────────────────────────────
+  # 国产模型 - Kimi（月之暗面）
   - name: "Kimi k1.5"
     publisher: "月之暗面 (Moonshot)"
     country: "中国"
@@ -96,6 +127,12 @@ models:
     daily_api_calls_estimate: 20000000
     features: ["超长上下文", "文档分析", "长文本理解"]
     release_date: "2025-03"
+    capabilities:
+      coding: 80
+      reasoning: 82
+      long_context: 94
+      multilingual: 78
+      general_knowledge: 80
 
   - name: "Kimi k2"
     publisher: "月之暗面 (Moonshot)"
@@ -108,10 +145,14 @@ models:
     daily_api_calls_estimate: 15000000
     features: ["极速推理", "低成本", "通用对话"]
     release_date: "2025-04"
+    capabilities:
+      coding: 75
+      reasoning: 78
+      long_context: 72
+      multilingual: 74
+      general_knowledge: 76
 
-  # ─────────────────────────────────────────────
-  # 国产模型 — Qwen（阿里通义千问）
-  # ─────────────────────────────────────────────
+  # 国产模型 - Qwen（阿里通义千问）
   - name: "Qwen-Turbo"
     publisher: "阿里巴巴 (通义千问)"
     country: "中国"
@@ -123,6 +164,12 @@ models:
     daily_api_calls_estimate: 80000000
     features: ["超低成本", "极速响应", "开源生态"]
     release_date: "2024-09"
+    capabilities:
+      coding: 70
+      reasoning: 68
+      long_context: 72
+      multilingual: 75
+      general_knowledge: 70
 
   - name: "Qwen-Plus"
     publisher: "阿里巴巴 (通义千问)"
@@ -135,6 +182,12 @@ models:
     daily_api_calls_estimate: 50000000
     features: ["均衡性能", "代码能力", "多语言"]
     release_date: "2024-09"
+    capabilities:
+      coding: 85
+      reasoning: 83
+      long_context: 80
+      multilingual: 86
+      general_knowledge: 84
 
   - name: "Qwen-Max"
     publisher: "阿里巴巴 (通义千问)"
@@ -147,10 +200,14 @@ models:
     daily_api_calls_estimate: 30000000
     features: ["最强基座", "复杂推理", "专业领域"]
     release_date: "2024-09"
+    capabilities:
+      coding: 90
+      reasoning: 88
+      long_context: 70
+      multilingual: 89
+      general_knowledge: 88
 
-  # ─────────────────────────────────────────────
-  # 国产模型 — GLM（智谱 AI）
-  # ─────────────────────────────────────────────
+  # 国产模型 - GLM（智谱 AI）
   - name: "GLM-4-Plus"
     publisher: "智谱 AI (GLM)"
     country: "中国"
@@ -162,6 +219,12 @@ models:
     daily_api_calls_estimate: 15000000
     features: ["学术研究", "多模态", "代码生成"]
     release_date: "2024-07"
+    capabilities:
+      coding: 82
+      reasoning: 80
+      long_context: 78
+      multilingual: 80
+      general_knowledge: 82
 
   - name: "GLM-4-Air"
     publisher: "智谱 AI (GLM)"
@@ -174,6 +237,12 @@ models:
     daily_api_calls_estimate: 25000000
     features: ["高性价比", "快速响应", "平衡性能"]
     release_date: "2024-07"
+    capabilities:
+      coding: 76
+      reasoning: 74
+      long_context: 72
+      multilingual: 75
+      general_knowledge: 74
 
   - name: "GLM-4-Flash"
     publisher: "智谱 AI (GLM)"
@@ -186,10 +255,14 @@ models:
     daily_api_calls_estimate: 30000000
     features: ["免费级别", "极低价格", "入门首选"]
     release_date: "2024-07"
+    capabilities:
+      coding: 72
+      reasoning: 70
+      long_context: 68
+      multilingual: 71
+      general_knowledge: 70
 
-  # ─────────────────────────────────────────────
-  # 国产模型 — Doubao（字节跳动豆包）
-  # ─────────────────────────────────────────────
+  # 国产模型 - Doubao（字节跳动豆包）
   - name: "Doubao-Pro"
     publisher: "字节跳动 (豆包)"
     country: "中国"
@@ -201,10 +274,14 @@ models:
     daily_api_calls_estimate: 100000000
     features: ["极致低价", "海量调用", "企业级"]
     release_date: "2025-01"
+    capabilities:
+      coding: 78
+      reasoning: 76
+      long_context: 85
+      multilingual: 74
+      general_knowledge: 76
 
-  # ─────────────────────────────────────────────
-  # 国产模型 — Baichuan（百川智能）
-  # ─────────────────────────────────────────────
+  # 国产模型 - Baichuan（百川智能）
   - name: "Baichuan4"
     publisher: "百川智能 (Baichuan)"
     country: "中国"
@@ -216,3 +293,9 @@ models:
     daily_api_calls_estimate: 10000000
     features: ["医疗垂直", "中文意图", "长上下文"]
     release_date: "2025-01"
+    capabilities:
+      coding: 74
+      reasoning: 72
+      long_context: 82
+      multilingual: 80
+      general_knowledge: 75
