@@ -12,9 +12,9 @@ export default function ScatterPlot({ models }: ScatterPlotProps) {
     if (!chartRef.current) return;
     const chart = echarts.init(chartRef.current);
     const scatterData = models.map((m) => ({
-      value: [m.input_price_cny_per_1m, m.context_window_tokens],
+      value: [m.input_price_usd_per_1m, m.context_window_tokens],
       name: m.name, category: m.category, publisher: m.publisher,
-      output_price: m.output_price_cny_per_1m, calls: m.daily_api_calls_estimate,
+      output_price: m.output_price_usd_per_1m, calls: m.daily_api_calls_estimate,
     }));
     const option: echarts.EChartsOption = {
       tooltip: {
@@ -29,7 +29,7 @@ export default function ScatterPlot({ models }: ScatterPlotProps) {
       },
       grid: { left: 70, right: 30, top: 30, bottom: 50 },
       xAxis: {
-        name: "输入价格 (￥/1M Token)", nameLocation: "middle", nameGap: 30, type: "value",
+        name: "输入价格 ($/1M Token)", nameLocation: "middle", nameGap: 30, type: "value",
         axisLine: { lineStyle: { color: "#4b5563" } },
         axisLabel: { color: "#9ca3af", fontSize: 11 },
         splitLine: { lineStyle: { color: "#1f2937", type: "dashed" } },
