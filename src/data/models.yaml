@@ -1,0 +1,218 @@
+# AI-Compass 智览 — 大模型定价与能力对比数据源
+# 数据来源：各厂商官方定价文档（截至 2025 年中）
+# 汇率参考：1 USD ≈ 7.2 CNY
+#
+# 字段说明：
+#   name: 模型名称
+#   publisher: 发布商
+#   country: 国家/地区
+#   category: 分类 (international / domestic)
+#   context_window: 上下文窗口（人类可读格式）
+#   context_window_tokens: 上下文窗口（数值）
+#   input_price_cny_per_1m: 输入价格（元/百万 Token）
+#   output_price_cny_per_1m: 输出价格（元/百万 Token）
+#   daily_api_calls_estimate: 日均调用量估算（次）
+#   features: 特点标签
+#   release_date: 发布时间
+
+models:
+  # ─────────────────────────────────────────────
+  # 国际模型
+  # ─────────────────────────────────────────────
+  - name: "GPT-4o"
+    publisher: "OpenAI"
+    country: "美国"
+    category: "international"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 18.00
+    output_price_cny_per_1m: 72.00
+    daily_api_calls_estimate: 50000000
+    features: ["多模态", "实时推理", "速度最快"]
+    release_date: "2024-05"
+
+  - name: "Claude 3.5 Sonnet"
+    publisher: "Anthropic"
+    country: "美国"
+    category: "international"
+    context_window: "200K"
+    context_window_tokens: 200000
+    input_price_cny_per_1m: 21.60
+    output_price_cny_per_1m: 108.00
+    daily_api_calls_estimate: 30000000
+    features: ["代码生成", "长上下文", "思维链推理"]
+    release_date: "2024-07"
+
+  - name: "Gemini 1.5 Pro"
+    publisher: "Google"
+    country: "美国"
+    category: "international"
+    context_window: "1M"
+    context_window_tokens: 1000000
+    input_price_cny_per_1m: 9.00
+    output_price_cny_per_1m: 36.00
+    daily_api_calls_estimate: 25000000
+    features: ["超长上下文", "多模态", "视频理解"]
+    release_date: "2024-02"
+
+  # ─────────────────────────────────────────────
+  # 国产模型 — DeepSeek（深度求索）
+  # ─────────────────────────────────────────────
+  - name: "DeepSeek-V3"
+    publisher: "深度求索 (DeepSeek)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 1.00
+    output_price_cny_per_1m: 2.00
+    daily_api_calls_estimate: 40000000
+    features: ["极致性价比", "MoE架构", "多语言"]
+    release_date: "2024-12"
+
+  - name: "DeepSeek-R1"
+    publisher: "深度求索 (DeepSeek)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 0.14
+    output_price_cny_per_1m: 0.55
+    daily_api_calls_estimate: 35000000
+    features: ["强化推理", "思维链", "竞赛级解题"]
+    release_date: "2025-01"
+
+  # ─────────────────────────────────────────────
+  # 国产模型 — Kimi（月之暗面）
+  # ─────────────────────────────────────────────
+  - name: "Kimi k1.5"
+    publisher: "月之暗面 (Moonshot)"
+    country: "中国"
+    category: "domestic"
+    context_window: "256K"
+    context_window_tokens: 256000
+    input_price_cny_per_1m: 3.00
+    output_price_cny_per_1m: 12.00
+    daily_api_calls_estimate: 20000000
+    features: ["超长上下文", "文档分析", "长文本理解"]
+    release_date: "2025-03"
+
+  - name: "Kimi k2"
+    publisher: "月之暗面 (Moonshot)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 0.50
+    output_price_cny_per_1m: 2.00
+    daily_api_calls_estimate: 15000000
+    features: ["极速推理", "低成本", "通用对话"]
+    release_date: "2025-04"
+
+  # ─────────────────────────────────────────────
+  # 国产模型 — Qwen（阿里通义千问）
+  # ─────────────────────────────────────────────
+  - name: "Qwen-Turbo"
+    publisher: "阿里巴巴 (通义千问)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 0.003
+    output_price_cny_per_1m: 0.006
+    daily_api_calls_estimate: 80000000
+    features: ["超低成本", "极速响应", "开源生态"]
+    release_date: "2024-09"
+
+  - name: "Qwen-Plus"
+    publisher: "阿里巴巴 (通义千问)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 0.08
+    output_price_cny_per_1m: 0.32
+    daily_api_calls_estimate: 50000000
+    features: ["均衡性能", "代码能力", "多语言"]
+    release_date: "2024-09"
+
+  - name: "Qwen-Max"
+    publisher: "阿里巴巴 (通义千问)"
+    country: "中国"
+    category: "domestic"
+    context_window: "32K"
+    context_window_tokens: 32000
+    input_price_cny_per_1m: 0.04
+    output_price_cny_per_1m: 0.12
+    daily_api_calls_estimate: 30000000
+    features: ["最强基座", "复杂推理", "专业领域"]
+    release_date: "2024-09"
+
+  # ─────────────────────────────────────────────
+  # 国产模型 — GLM（智谱 AI）
+  # ─────────────────────────────────────────────
+  - name: "GLM-4-Plus"
+    publisher: "智谱 AI (GLM)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 100.00
+    output_price_cny_per_1m: 100.00
+    daily_api_calls_estimate: 15000000
+    features: ["学术研究", "多模态", "代码生成"]
+    release_date: "2024-07"
+
+  - name: "GLM-4-Air"
+    publisher: "智谱 AI (GLM)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 0.50
+    output_price_cny_per_1m: 2.00
+    daily_api_calls_estimate: 25000000
+    features: ["高性价比", "快速响应", "平衡性能"]
+    release_date: "2024-07"
+
+  - name: "GLM-4-Flash"
+    publisher: "智谱 AI (GLM)"
+    country: "中国"
+    category: "domestic"
+    context_window: "128K"
+    context_window_tokens: 128000
+    input_price_cny_per_1m: 1.00
+    output_price_cny_per_1m: 1.00
+    daily_api_calls_estimate: 30000000
+    features: ["免费级别", "极低价格", "入门首选"]
+    release_date: "2024-07"
+
+  # ─────────────────────────────────────────────
+  # 国产模型 — Doubao（字节跳动豆包）
+  # ─────────────────────────────────────────────
+  - name: "Doubao-Pro"
+    publisher: "字节跳动 (豆包)"
+    country: "中国"
+    category: "domestic"
+    context_window: "256K"
+    context_window_tokens: 256000
+    input_price_cny_per_1m: 4.00
+    output_price_cny_per_1m: 40.00
+    daily_api_calls_estimate: 100000000
+    features: ["极致低价", "海量调用", "企业级"]
+    release_date: "2025-01"
+
+  # ─────────────────────────────────────────────
+  # 国产模型 — Baichuan（百川智能）
+  # ─────────────────────────────────────────────
+  - name: "Baichuan4"
+    publisher: "百川智能 (Baichuan)"
+    country: "中国"
+    category: "domestic"
+    context_window: "256K"
+    context_window_tokens: 256000
+    input_price_cny_per_1m: 4.00
+    output_price_cny_per_1m: 8.00
+    daily_api_calls_estimate: 10000000
+    features: ["医疗垂直", "中文意图", "长上下文"]
+    release_date: "2025-01"
