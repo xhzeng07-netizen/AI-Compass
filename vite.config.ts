@@ -23,4 +23,7 @@ export default defineConfig({
     tailwindcss(),
     yamlPlugin(),
   ],
+  server: {
+    host: '127.0.0.1',
+  },
 })

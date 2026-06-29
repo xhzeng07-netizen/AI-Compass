@@ -12,7 +12,9 @@ function formatNumber(n: number): string {
 }
 
 function formatPrice(n: number): string {
-  return `$${n.toFixed(2)}`;
+  if (n < 0.01) return `￥${n.toFixed(4)}`;
+  if (n < 1) return `￥${n.toFixed(2)}`;
+  return `￥${n.toFixed(2)}`;
 }
 
 function App() {
@@ -20,10 +22,12 @@ function App() {
     () => [
       { key: "name", label: "模型名称" },
       { key: "publisher", label: "发布商" },
+      { key: "country", label: "国家" },
       { key: "context_window", label: "上下文窗口" },
-      { key: "input_price_usd_per_1m", label: "输入价格 (USD/1M Token)" },
-      { key: "output_price_usd_per_1m", label: "输出价格 (USD/1M Token)" },
+      { key: "input_price_cny_per_1m", label: "输入价格 (￥/1M Token)" },
+      { key: "output_price_cny_per_1m", label: "输出价格 (￥/1M Token)" },
       { key: "daily_api_calls_estimate", label: "日均调用量估算" },
+      { key: "features", label: "特点标签" },
     ],
     []
   );
@@ -32,9 +36,10 @@ function App() {
     (a, b) => b.context_window_tokens - a.context_window_tokens
   )[0];
 
-  const totalCalls = models.reduce((s, m) => s + m.daily_api_calls_estimate, 0);
 
-  const minInputPrice = Math.min(...models.map((m) => m.input_price_usd_per_1m));
+  const minInputPrice = Math.min(...models.map((m) => m.input_price_cny_per_1m));
+
+  const domesticCount = models.filter((m) => m.category === "domestic").length;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 text-gray-100">
@@ -69,18 +74,18 @@ function App() {
           </div>
           <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-4 backdrop-blur-sm">
             <div className="text-xs font-medium uppercase tracking-wider text-gray-500">
-              最高上下文窗口
+              国产模型
             </div>
             <div className="mt-1 text-2xl font-bold text-blue-400">
-              {maxContext?.context_window ?? "-"}
+              {domesticCount}
             </div>
           </div>
           <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-4 backdrop-blur-sm">
             <div className="text-xs font-medium uppercase tracking-wider text-gray-500">
-              总日均调用量
+              最高上下文窗口
             </div>
             <div className="mt-1 text-2xl font-bold text-emerald-400">
-              {formatNumber(totalCalls)}
+              {maxContext?.context_window ?? "-"}
             </div>
           </div>
           <div className="rounded-xl border border-gray-800 bg-gray-900/60 p-4 backdrop-blur-sm">
@@ -98,7 +103,7 @@ function App() {
           <div className="border-b border-gray-800 px-5 py-4">
             <h2 className="text-base font-semibold text-white">模型对比数据</h2>
             <p className="mt-0.5 text-xs text-gray-500">
-              实时数据来源于各厂商官方定价与公开估算
+              所有价格统一折算为人民币（￥/百万 Token），数据来源：各厂商官方定价
             </p>
           </div>
           <div className="overflow-x-auto">
@@ -108,7 +113,7 @@ function App() {
                   {columns.map((col) => (
                     <th
                       key={col.key}
-                      className="whitespace-nowrap px-5 py-3 text-left font-medium text-gray-400"
+                      className="whitespace-nowrap px-4 py-3 text-left font-medium text-gray-400"
                     >
                       {col.label}
                     </th>
@@ -123,21 +128,34 @@ function App() {
                       idx === models.length - 1 ? "border-b-0" : ""
                     }`}
                   >
-                    <td className="px-5 py-3.5">
+                    <td className="px-4 py-3.5">
                       <span className="font-medium text-white">{model.name}</span>
                     </td>
-                    <td className="px-5 py-3.5 text-gray-300">{model.publisher}</td>
-                    <td className="px-5 py-3.5 text-gray-300">{model.context_window}</td>
-                    <td className="px-5 py-3.5 text-gray-300">
-                      {formatPrice(model.input_price_usd_per_1m)}
+                    <td className="px-4 py-3.5 text-gray-300">{model.publisher}</td>
+                    <td className="px-4 py-3.5 text-gray-300">{model.country}</td>
+                    <td className="px-4 py-3.5 text-gray-300">{model.context_window}</td>
+                    <td className="px-4 py-3.5 text-gray-300">
+                      {formatPrice(model.input_price_cny_per_1m)}
                     </td>
-                    <td className="px-5 py-3.5 text-gray-300">
-                      {formatPrice(model.output_price_usd_per_1m)}
+                    <td className="px-4 py-3.5 text-gray-300">
+                      {formatPrice(model.output_price_cny_per_1m)}
                     </td>
-                    <td className="px-5 py-3.5">
+                    <td className="px-4 py-3.5">
                       <span className="inline-flex items-center rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-xs font-medium text-emerald-400">
                         {formatNumber(model.daily_api_calls_estimate)}
                       </span>
+                    </td>
+                    <td className="px-4 py-3.5">
+                      <div className="flex flex-wrap gap-1">
+                        {model.features.map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-block rounded bg-gray-800 px-2 py-0.5 text-xs text-gray-400"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
                     </td>
                   </tr>
                 ))}
