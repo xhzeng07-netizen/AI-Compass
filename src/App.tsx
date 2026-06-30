@@ -15,9 +15,9 @@ function formatNumber(n: number): string {
 }
 
 function formatPrice(n: number): string {
-  if (n < 0.01) return `$$n.toFixed(4)`;
-  if (n < 1) return `$$n.toFixed(2)`;
-  return `$$n.toFixed(2)`;
+  if (n < 0.01) return "$" + n.toFixed(4);
+  if (n < 1) return "$" + n.toFixed(2);
+  return "$" + n.toFixed(2);
 }
 
 const TABS: { key: TabKey; label: string }[] = [

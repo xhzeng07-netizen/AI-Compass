@@ -21,7 +21,7 @@ export default function ScatterPlot({ models }: ScatterPlotProps) {
         trigger: "item",
         formatter: (params: any) => {
           const d = params.data;
-          return d.name + " ("+ d.publisher + ")" + "\n" + "输入价格: ￥" + d.value[0] + "/1M Token\n输出价格: ￥" + d.output_price + "/1M Token\n日均调用: " + (d.calls / 1000000).toFixed(0) + "M";
+          return d.name + " ("+ d.publisher + ")" + "\n" + "输入价格: $" + d.value[0] + "/1M Token\n输出价格: $" + d.output_price + "/1M Token\n日均调用: " + (d.calls / 1000000).toFixed(0) + "M";
         },
         backgroundColor: "rgba(17,24,39,0.95)",
         borderColor: "#374151",
