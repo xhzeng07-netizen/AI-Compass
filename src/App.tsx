@@ -3,6 +3,7 @@ import modelsData from "./data/models.yaml";
 import type { ModelData } from "./types";
 import ScatterPlot from "./components/ScatterPlot";
 import RadarChart from "./components/RadarChart";
+import CostCalculator from "./components/CostCalculator";
 
 const models: ModelData[] = (modelsData as { models: ModelData[] }).models;
 
@@ -31,6 +32,7 @@ type SortDir = "asc" | "desc" | "none";
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("table");
+  const [showCalculator, setShowCalculator] = useState<boolean>(false);
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
@@ -281,6 +283,19 @@ function App() {
               <p className="mt-0 text-xs text-gray-500">选择 2-3 个模型进行多维能力对比（满分 100）</p>
             </div>
             <RadarChart models={models} selected={selectedModels} onToggle={toggleSelection} />
+          </div>
+        )}
+
+                {/* Floating Calculator Button */}
+        <button
+          onClick={() => setShowCalculator(!showCalculator)}
+          className={"fixed bottom-6 right-6 z-50 rounded-full bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 text-sm font-medium shadow-lg shadow-blue-500/30 transition-all"}>
+          💰 成本计算器
+        </button>
+
+        {showCalculator && (
+          <div className="fixed bottom-6 right-6 z-40 w-full max-w-md">
+            <CostCalculator />
           </div>
         )}
 
