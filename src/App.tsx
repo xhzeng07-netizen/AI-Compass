@@ -1,9 +1,11 @@
 import { useState, useMemo } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import modelsData from "./data/models.yaml";
 import type { ModelData } from "./types";
 import ScatterPlot from "./components/ScatterPlot";
 import RadarChart from "./components/RadarChart";
 import CostCalculator from "./components/CostCalculator";
+import Login from "./pages/Login";
 
 const models: ModelData[] = (modelsData as { models: ModelData[] }).models;
 
@@ -30,7 +32,7 @@ const TABS: { key: TabKey; label: string }[] = [
 type SortKey = "input_price_usd_per_1m" | "output_price_usd_per_1m" | "context_window" | "none";
 type SortDir = "asc" | "desc" | "none";
 
-function App() {
+function Dashboard() {
   const [activeTab, setActiveTab] = useState<TabKey>("table");
   const [showCalculator, setShowCalculator] = useState<boolean>(false);
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
@@ -145,6 +147,12 @@ function App() {
           </div>
           <div className="hidden text-xs text-gray-500 sm:block">
             大模型应用分析大屏
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => { localStorage.removeItem("ai-compass-auth"); window.location.href = "/login"; }}
+              className="rounded-lg bg-gray-800 px-3 py-1.5 text-xs font-medium text-gray-400 hover:bg-gray-700 hover:text-gray-200 transition-colors">退出登录
+            </button>
           </div>
         </div>
       </nav>
@@ -307,7 +315,16 @@ function App() {
   );
 }
 
-export default App;
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </Routes>
+  );
+}
 
 
 
